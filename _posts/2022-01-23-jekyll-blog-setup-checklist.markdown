@@ -6,7 +6,7 @@ categories: jekyll update
 permalink: /posts/824d93f1.html
 ---
 1. 安装jekyll
-    1. 安装ruby
+    a. 安装ruby
         
         为了避免版本冲突问题，使用rbenv进行安装（以ubuntu为例，参考[https://gorails.com/setup/ubuntu/18.04](https://gorails.com/setup/ubuntu/18.04)）
         
@@ -55,10 +55,11 @@ jekyll new myblog
 
   方案二：直接选择自己喜欢的主题，从github将项目克隆到本地
 
-1. vps上部署git仓库，配置hook实现自动部署blog能力(参考[https://jekyllrb.com/docs/deployment/automated/](https://jekyllrb.com/docs/deployment/automated/))
-    1. 创建git用户，并配置权限
-        1. 创建 `/var/www/myblog` 目录，将用户属组配置为git用户
-    2. 创建git仓库
+
+3. vps上部署git仓库，配置hook实现自动部署blog能力(参考[https://jekyllrb.com/docs/deployment/automated/](https://jekyllrb.com/docs/deployment/automated/))
+    a. 创建git用户，并配置权限
+        - 创建 `/var/www/myblog` 目录，将用户属组配置为git用户
+    b. 创建git仓库
     
     以git用户登录vps
     
@@ -104,7 +105,7 @@ jekyll new myblog
 
         
 
-1. vps上部署nginx
-    1. 部署nginx
-    2. 根据前面步骤中 `PUBLIC_WWW` 的值，配置nginx 
-    3. 安装域名证书（可通过certbot完成）
+4. vps上部署nginx
+    a. 部署nginx
+    b. 根据前面步骤中 `PUBLIC_WWW` 的值，配置nginx 
+    c. 安装域名证书（可通过certbot完成）

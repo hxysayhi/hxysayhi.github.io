@@ -55,6 +55,8 @@ not_found:
   hint_template: :HEAD_BAK to try finding it again, or search for it on the :ARCHIVES_PAGE.
   head_back: Head back Home
   archives_page: Archives page
+  game_template: Or play a game in :DARK_ROOM
+  game: dark room
 
 # ----- Posts related labels -----
 

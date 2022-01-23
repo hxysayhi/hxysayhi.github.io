@@ -21,11 +21,19 @@ redirect_from:
     <a href="{{ 'archives' | relative_url }}">{{ site.data.locales[lang].not_found.archives_page }}</a>
   {%- endcapture -%}
 
+  {%- capture _game_page -%}
+    <a href="{{ site.url }}/game">{{ site.data.locales[lang].not_found.game }}</a>
+  {%- endcapture -%}
+
   <p>{{site.data.locales[lang].not_found.statment }}</p>
 
   <p>{{ site.data.locales[lang].not_found.hint_template
     | replace: ':HEAD_BAK', _head_back
     | replace: ':ARCHIVES_PAGE', _archives_page }}
+  </p>
+
+  <p>{{ site.data.locales[lang].not_found.game_template
+    | replace: ':DARK_ROOM', _game_page }}
   </p>
 
 </div>

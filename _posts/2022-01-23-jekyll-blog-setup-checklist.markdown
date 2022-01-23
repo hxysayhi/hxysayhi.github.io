@@ -27,55 +27,51 @@ permalink: /posts/824d93f1.html
 
     - 安装ruby
 
+      ```shell
+      rbenv install 3.0.3
+      rbenv global 3.0.3
+      ```
+      检查安装是否符合预期
 
-    ```shell
-    rbenv install 3.0.3
-    rbenv global 3.0.3
-    ```
-    检查安装是否符合预期
-
-    ```
-    ruby -v
-    ```
+      ```
+      ruby -v
+      ```
 
     - 安装 Bundler
 
-    ```shell
-    gem install bundler
-    ```
+      ```shell
+      gem install bundler
+      ```
 
     1.2 安装jekyll
 
-    ```shell
-    gem install jekyll bundler
-    ```
+      ```shell
+      gem install jekyll bundler
+      ```
 
-    ​
 
 2. 创建blog project
 
-  方案一： 安装好ruby后，安装jekyll，并创建blog project：
+    方案一： 安装好ruby后，安装jekyll，并创建blog project：
 
-```bash
-gem install bundler jekyll
+    ```bash
+    gem install bundler jekyll
 
-jekyll new myblog
-```
+    jekyll new myblog
+    ```
 
-​	方案二：直接选择自己喜欢的主题，从github将项目克隆到本地
-
-
+    方案二：直接选择自己喜欢的主题，从github将项目克隆到本地
 
 
-3. vps上部署git仓库，配置hook实现自动部署blog能力(参考[https://jekyllrb.com/docs/deployment/automated/](https://jekyllrb.com/docs/deployment/automated/))
 
-    ​
+
+1. vps上部署git仓库，配置hook实现自动部署blog能力(参考[https://jekyllrb.com/docs/deployment/automated/](https://jekyllrb.com/docs/deployment/automated/))
+
 
     3.1 创建git用户，并配置权限
 
     - 创建 `/var/www/myblog` 目录，将用户属组配置为git用户
 
-    ​
 
     3.2 创建git仓库
 
@@ -109,7 +105,6 @@ jekyll new myblog
     exit 
     ```
 
-    ​
 
     3.3 本地blog project绑定vps git 仓库
 
@@ -122,10 +117,10 @@ jekyll new myblog
 
     后续push时将会触发vps git hook进行自动部署
 
-    ​
 
 
-4. vps上部署nginx
+2. vps上部署nginx
+   
     4.1 部署nginx
 
     4.2 根据前面步骤中 `PUBLIC_WWW` 的值，配置nginx 

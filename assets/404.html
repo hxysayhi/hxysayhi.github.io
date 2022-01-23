@@ -25,11 +25,19 @@ redirect_from:
     <a href="{{ site.url }}/game">{{ site.data.locales[lang].not_found.game }}</a>
   {%- endcapture -%}
 
+  {%- capture _expired_page -%}
+    <a href="{{ site.url }}/old">{{ site.data.locales[lang].not_found.expired_blog }}</a>
+  {%- endcapture -%}
+
   <p>{{site.data.locales[lang].not_found.statment }}</p>
 
   <p>{{ site.data.locales[lang].not_found.hint_template
     | replace: ':HEAD_BAK', _head_back
     | replace: ':ARCHIVES_PAGE', _archives_page }}
+  </p>
+
+  <p>{{ site.data.locales[lang].not_found.expired_template
+    | replace: ':EXPIRED_BLOG', _expired_page }}
   </p>
 
   <p>{{ site.data.locales[lang].not_found.game_template

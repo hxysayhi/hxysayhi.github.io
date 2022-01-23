@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "jekyll静态blog部署 checklist"
-date:   2022-01-2023 12:33:55 +0800
+date:   2022-01-23 12:33:55 +0800
 categories: jekyll update
 permalink: /posts/824d93f1.html
 ---

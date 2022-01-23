@@ -8,7 +8,7 @@
       <a href="{{ '/' | relative_url }}" alt="avatar" class="mx-auto">
         {% if site.avatar != '' and site.avatar %}
           {% capture avatar_url %}
-            {%- if site.avatar.local = true -%}
+            {%- if site.avatar_local = true -%}
               {{ site.avatar | relative_url }}
             {%- if site.avatar contains '://' -%}
               {{ site.avatar }}

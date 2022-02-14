@@ -4,6 +4,7 @@ title:  "jekyll post page 生成脚本"
 date:   2022-01-26 23:34:48 +0800
 categories: jekyll update
 permalink: /posts/65e8b919/
+tags: [writing, jekyll]
 ---
 
 脚本功能：

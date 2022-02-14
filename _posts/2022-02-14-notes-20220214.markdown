@@ -1,0 +1,171 @@
+---
+layout: post
+title:  "学海拾贝20220211"
+date:   2022-02-14 09:39:53 +0800
+categories: jekyll update
+permalink: /posts/7af892d2/
+tags: [writing note]
+---
+
+# 20220124-20220214
+
+## 问题目录：
+
+1. shell script 中echo 变量时，换行丢失问题
+2. vim 中粘贴代码，缩进错误
+3. linux 文件拷贝，保留时间属性
+4. umask 的作用
+5. dlv 进行golang 调试传参数问题
+
+## shell script 中echo 变量时，换行丢失问题
+
+### 问题描述
+
+在shell script中，将命令执行的结果复制给一个变量，供后续使用，命令执行的结果是多行输出，但是在后续对变量使用时，通过echo 输出变量时，没有换行。例如：
+
+```bash
+TEST=`ls -l /`
+echo ${TEST}
+```
+
+`ls -l /` 输出结果为：
+
+```bash
+total 10
+drwxrwxr-x  40 root  admin  1280  1 25 09:29 Applications
+drwxr-xr-x  67 root  wheel  2144 12 23 15:58 Library
+drwxr-xr-x@  9 root  wheel   288 12  8 07:39 System
+drwxr-xr-x   5 root  admin   160 12  8 07:39 Users
+drwxr-xr-x   3 root  wheel    96  1 25 11:35 Volumes
+drwxr-xr-x@ 38 root  wheel  1216 12  8 07:39 bin
+drwxr-xr-x   2 root  wheel    64  9 10 08:32 cores
+dr-xr-xr-x   4 root  wheel  4762 12 20 21:10 dev
+lrwxr-xr-x@  1 root  wheel    11 12  8 07:39 etc -> private/etc
+lrwxr-xr-x   1 root  wheel    25 12 20 21:12 home -> /System/Volumes/Data/home
+drwxr-xr-x   3 root  wheel    96 12 18 12:27 opt
+drwxr-xr-x   6 root  wheel   192 12  8 07:39 private
+drwxr-xr-x@ 65 root  wheel  2080 12  8 07:39 sbin
+lrwxr-xr-x@  1 root  wheel    11 12  8 07:39 tmp -> private/tmp
+drwxr-xr-x@ 11 root  wheel   352 12  8 07:39 usr
+lrwxr-xr-x@  1 root  wheel    11 12  8 07:39 var -> private/var
+```
+
+赋值到变量再 `echo` 得到结果：
+
+```bash
+total 10 drwxrwxr-x 40 root admin 1280 1 25 09:29 Applications drwxr-xr-x 67 root wheel 2144 12 23 15:58 Library drwxr-xr-x@ 9 root wheel 288 12 8 07:39 System drwxr-xr-x 5 root admin 160 12 8 07:39 Users drwxr-xr-x 3 root wheel 96 1 25 11:35 Volumes drwxr-xr-x@ 38 root wheel 1216 12 8 07:39 bin drwxr-xr-x 2 root wheel 64 9 10 08:32 cores dr-xr-xr-x 4 root wheel 4762 12 20 21:10 dev lrwxr-xr-x@ 1 root wheel 11 12 8 07:39 etc -> private/etc lrwxr-xr-x 1 root wheel 25 12 20 21:12 home -> /System/Volumes/Data/home drwxr-xr-x 3 root wheel 96 12 18 12:27 opt drwxr-xr-x 6 root wheel 192 12 8 07:39 private drwxr-xr-x@ 65 root wheel 2080 12 8 07:39 sbin lrwxr-xr-x@ 1 root wheel 11 12 8 07:39 tmp -> private/tmp drwxr-xr-x@ 11 root wheel 352 12 8 07:39 usr lrwxr-xr-x@ 1 root wheel 11 12 8 07:39 var -> private/var
+```
+
+### 解决方案
+
+`echo` 时将变量用双引号包裹
+
+```bash
+TEST=`ls -l /`
+echo "${TEST}"
+```
+
+---
+
+## vim 中粘贴代码，缩进错误
+
+### 问题描述
+
+在vim粘贴代码时，代码原本已经有缩进，但粘贴时由于vim的自动缩进功能，导致出现多级缩进
+
+### 解决方案
+
+在命令行模式，设置进入paste模式：
+
+```bash
+:set paste
+```
+
+然后粘贴即可。
+
+取消paste模式：
+
+```bash
+:set nopaste
+```
+
+---
+
+## linux 文件拷贝，保留时间属性
+
+### 问题描述
+
+使用cp 命令拷贝文件后，拷贝后的文件更新时间为当前时间。但期望得到的结果是保留源文件的时间。
+
+### 解决方案
+
+```bash
+cp -p /path/to/source/file /path/to/destination/file
+```
+
+关于 `cp` 的参数：
+
+```bash
+cp [options] source dest
+```
+
+或
+
+```bash
+cp [options] source... directory
+```
+
+**参数说明**：
+
+- a：此选项通常在复制目录时使用，它保留链接、文件属性，并复制目录下的所有内容。其作用等于dpR参数组合。
+- d：复制时保留链接。这里所说的链接相当于 Windows 系统中的快捷方式。
+- f：覆盖已经存在的目标文件而不给出提示。
+- i：与 **f** 选项相反，在覆盖目标文件之前给出提示，要求用户确认是否覆盖，回答 **y** 时目标文件将被覆盖。
+- p：除复制文件的内容外，还把修改时间和访问权限也复制到新文件中。
+- r：若给出的源文件是一个目录文件，此时将复制该目录下所有的子目录和文件。
+- l：不复制文件，只是生成链接文件。
+
+### umask 的作用
+
+参考：[https://www.cyberciti.biz/tips/understanding-linux-unix-umask-value-usage.html](https://www.cyberciti.biz/tips/understanding-linux-unix-umask-value-usage.html)
+
+新的目录或文件的权限为`base permissions - umask permissions`
+
+目录的 `base permissions` 为 777
+
+文件的 `base permissions` 为 666
+
+- 权限和值的对应关系：flag 标志位的表示方式
+
+| 权限值 | 二进制（rwx） | 权限 |
+| --- | --- | --- |
+| 0 | 000 | no permissions |
+| 1 | 001 | execute  |
+| 2 | 010 | write  |
+| 4 | 100 | read only |
+- umask值和权限值对应权限关系：
+
+| umask值 | 权限值 | 权限 |
+| --- | --- | --- |
+| 0 （000） | 7 （111） | read, write and execute |
+| 1 （001） | 6 （110） | read and write |
+| 2 （010） | 5 （101） | read and execute |
+| 3 （011） | 4 （100） | read only |
+| 4 （100） | 3 （011） | write and execute |
+| 5 （101） | 2 （010） | write only |
+| 6 （110） | 1 （001） | execute only |
+| 7 （111） | 0 （000） | no permissions |
+
+### dlv 进行golang 调试传参数问题
+
+进行 golang调试时，希望对向待调试的程序进行传参，如何实现？
+
+使用 `--` 告知 `dlv` 不要对之后的字符子串进行解析，而是进行原样传递。
+
+```bash
+dlv --listen=:5432 exec /mypath/binary -- --config=config.toml 
+```
+
+ ref: [https://github.com/derekparker/delve/blob/master/Documentation/cli/getting_started.md#debugging-main-packages](https://github.com/derekparker/delve/blob/master/Documentation/cli/getting_started.md#debugging-main-packages)
+
+[https://stackoverflow.com/questions/49923892/passing-arguments-to-executable-when-debugging-with-delve](https://stackoverflow.com/questions/49923892/passing-arguments-to-executable-when-debugging-with-delve)

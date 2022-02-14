@@ -125,7 +125,10 @@ cp [options] source... directory
 - r：若给出的源文件是一个目录文件，此时将复制该目录下所有的子目录和文件。
 - l：不复制文件，只是生成链接文件。
 
-### umask 的作用
+
+---
+
+## umask 的作用
 
 参考：[https://www.cyberciti.biz/tips/understanding-linux-unix-umask-value-usage.html](https://www.cyberciti.biz/tips/understanding-linux-unix-umask-value-usage.html)
 

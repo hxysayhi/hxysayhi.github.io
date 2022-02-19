@@ -4,7 +4,7 @@ title:  "学海拾贝-20220214-20220219"
 date:   2022-02-19 11:49:09 +0800
 categories: Technology notes
 permalink: /posts/1551f6df/
-tags: [writing, note]
+tags: [note]
 ---
 
 # note-20220214-20220219

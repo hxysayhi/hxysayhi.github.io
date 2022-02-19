@@ -4,7 +4,7 @@ title:  "我的头像"
 date:   2022-02-19 13:32:21 +0800
 categories: default
 permalink: /posts/2f076b02/
-tags: [writing]
+tags: [writing, tool]
 ---
 
 在看阮一峰的博客时，发现了一个根据输入的字符串生成头像的网站：[multiavatar.com](https://multiavatar.com/)

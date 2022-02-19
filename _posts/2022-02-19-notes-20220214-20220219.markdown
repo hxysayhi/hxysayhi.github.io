@@ -1,0 +1,209 @@
+---
+layout: post
+title:  "学海拾贝-20220214-20220219"
+date:   2022-02-19 11:49:09 +0800
+categories: jekyll update
+permalink: /posts/1551f6df/
+tags: [writing, note]
+---
+
+# note-20220214-20220219
+
+1. mac 输入法异常，出现两个输入候选框
+2. `kubectl` 查看指定pod的最新n行日志
+3. 一个nginx配置实验网站
+4. base64 编码后字符串长度变化
+5. —version 输出内容通过stderr 输出
+6. 强大的代码阅读工具source insight
+
+## mac 输入法异常，出现两个输入候选框
+
+杀掉进程，然后重启进程啥的都不行，在[v2ex](https://www.v2ex.com/t/526071) 找到问题原因和**解决方案**：
+
+- 原因：
+
+出现这个问题是因为输入文字时 launchpad 同步输入了搜索框，打开 launchpad 会发现搜索框里有一样的文字。
+
+- 解决：
+
+打开 terminal，输入  `killall Dock`
+
+重启所有的 Dock 和 launchpad 即可解决
+
+亲测，在 terminal 输入 `killall Dock` 后，问题得到解决。
+
+---
+
+## 查看指定pod的最新n行日志
+
+**[Tailing few lines from huge logs of kubectl logs -f](https://stackoverflow.com/questions/51835066/tailing-few-lines-from-huge-logs-of-kubectl-logs-f)**
+
+```
+# Display only the most recent 20 lines of output in pod nginx
+kubectl logs --tail=20 nginx
+
+# Show all logs from pod nginx written in the last hour
+kubectl logs --since=1h nginx
+```
+
+---
+
+## 一个nginx配置实验网站
+
+可以在网页上填写 nginx 配置文件，然后在线启动一个 nginx 实例。接着，你输入各种 curl 命令，与这个实例互动。
+
+[https://nginx-playground.wizardzines.com/](https://nginx-playground.wizardzines.com/)
+
+---
+
+## base64 编码后字符串长度变化
+
+[https://www.ruanyifeng.com/blog/2008/06/base64.html](https://www.ruanyifeng.com/blog/2008/06/base64.html)
+
+Base64的编码转换方式。
+
+所谓Base64，就是说选出64个字符----小写字母a-z、大写字母A-Z、数字0-9、符号"+"、"/"（再加上作为垫字的"="，实际上是65个字符）----作为一个基本字符集。然后，其他所有符号都转换成这个字符集中的字符。
+
+具体来说，转换方式可以分为四步。
+
+> 第一步，将每三个字节作为一组，一共是24个二进制位。
+> 
+> 
+> 第二步，将这24个二进制位分为四组，每个组有6个二进制位。
+> 
+> 第三步，在每组前面加两个00，扩展成32个二进制位，即四个字节。
+> 
+> 第四步，根据下表，得到扩展后的每个字节的对应符号，这就是Base64的编码值。
+> 
+
+> 0　A　　17　R　　　34　i　　　51　z
+> 
+> 
+> 1　B　　18　S　　　35　j　　　52　0
+> 
+> 2　C　　19　T　　　36　k　　　53　1
+> 
+> 3　D　　20　U　　　37　l　　　54　2
+> 
+> 4　E　　21　V　　　38　m　　　55　3
+> 
+> 5　F　　22　W　　　39　n　　　56　4
+> 
+> 6　G　　23　X　　　40　o　　　57　5
+> 
+> 7　H　　24　Y　　　41　p　　　58　6
+> 
+> 8　I　　　25　Z　　　42　q　　　59　7
+> 
+> 9　J　　26　a　　　43　r　　　60　8
+> 
+> 10　K　　27　b　　　44　s　　　61　9
+> 
+> 11　L　　28　c　　　45　t　　　62　+
+> 
+> 12　M　　29　d　　　46　u　　　63　/
+> 
+> 13　N　　30　e　　　47　v
+> 
+> 14　O　　31　f　　　48　w
+> 
+> 15　P　　32　g　　　49　x
+> 
+> 16　Q　　33　h　　　50　y
+> 
+
+因为，Base64将三个字节转化成四个字节，因此Base64编码后的文本，**会比原文本大出三分之一左右**。
+
+---
+
+## version 输出内容通过stderr输出
+
+python2、java等在执行version输出时，是通过stderr输出的。
+
+### 实验：
+
+1. python2执行version输出
+
+```bash
+$ python2 --version
+Python 2.7.18
+```
+
+1. python2执行version输出，并将stdout重定向到 /dev/null
+
+```bash
+$ python2 --version > /dev/null
+Python 2.7.18
+```
+
+1. python2执行version输出，并将stderr重定向到 /dev/null
+
+```bash
+$ python2 --version 2> /dev/null
+
+```
+
+1. python3执行version输出
+
+```bash
+$ python3 --version             
+Python 3.8.9
+```
+
+1. python3执行version输出，并将stdout重定向到 /dev/null
+
+```bash
+$ python3 --version > /dev/null
+
+```
+
+1. python2执行version输出，并将stderr重定向到 /dev/null
+
+```bash
+$ python3 --version 2> /dev/null
+Python 3.8.9
+```
+
+`java -version` 也是输出到stderr，测试版本是 1.8.0_101
+
+### 影响：
+
+对于获取stdout进行进一步处理的操作，就会出现获取不到数据的情况。比如通过创建子进程获取stdout并进行处理时，或者在命令行用管道进行级连处理时。
+
+对于创建子进程获取的情况，将stderr指定到stdout即可。
+
+对于命令行管道级连的方式，也一样：
+
+```bash
+command 2>&1 | command2
+```
+
+更进一步地，将stderr 信息通过stdout输出，不输出stdout： 
+
+```bash
+command 2>&1 >/dev/null | command2
+```
+
+即将stderr重定向到stdout后，再把stdout重定向到/dev/null，并保持stderr指向原stdout不变。同理也可以将stdout重定向到指定的文件。
+
+参考：
+
+- [https://stackoverflow.com/questions/2342826/how-can-i-pipe-stderr-and-not-stdout](https://stackoverflow.com/questions/2342826/how-can-i-pipe-stderr-and-not-stdout)
+- [https://stackoverflow.com/questions/16497317/piping-both-stdout-and-stderr-in-bash/37085215](https://stackoverflow.com/questions/16497317/piping-both-stdout-and-stderr-in-bash/37085215)
+
+---
+
+### 强大的代码阅读工具source insight
+
+[https://www.sourceinsight.com/](https://www.sourceinsight.com/)
+
+通过source insight能快速梳理代码结构，理清调用关系。具有以下关键功能：
+
+- Helps to understand an existing code base.
+- Quickly navigate function calls and callers.
+- Find references to functions, variables, and more - almost instantly.
+- See call graphs and class tree diagrams.
+- Preview function and class definitions without having to open a file.
+- See live references to variables and other declarations with Syntax Formatting.
+- Powerful editing features, including code snippets, symbolic auto-completion, and smart-rename.
+- Dynamic information panels work together to create a productive workflow.

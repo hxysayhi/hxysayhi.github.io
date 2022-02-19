@@ -1,0 +1,33 @@
+---
+layout: post
+title:  "my-avatar"
+date:   2022-02-19 13:32:21 +0800
+categories: default
+permalink: /posts/2f076b02/
+tags: [writing]
+---
+
+在看阮一峰的博客时，发现了一个根据输入的字符串生成头像的网站：[multiavatar.com](https://multiavatar.com/)
+
+![multiavatar](/pic/2f076b02/Snipaste_2022-02-19_14-06-51.png)
+
+于是就生成了现在的头像：  
+
+**Hxysayhi**
+
+![Hxysayhi](https://api.multiavatar.com/Hxysayhi.svg)
+
+  
+  
+再转换成各个尺寸和格式，妥妥的。呜呼呼呼呼～
+
+![h192](/pic/2f076b02/android-chrome-192x192.png)
+
+![h150](/pic/2f076b02/mstile-150x150.png)
+
+![h96](/pic/2f076b02/favicon-96x96.png)
+
+![h48](/pic/2f076b02/favicon.ico)
+
+![h32](/pic/2f076b02/favicon-32x32.png)
+

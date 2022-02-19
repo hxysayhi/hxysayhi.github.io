@@ -16,6 +16,8 @@ tags: [writing, note]
 5. —version 输出内容通过stderr 输出
 6. 强大的代码阅读工具source insight
 
+---
+
 ## mac 输入法异常，出现两个输入候选框
 
 杀掉进程，然后重启进程啥的都不行，在[v2ex](https://www.v2ex.com/t/526071) 找到问题原因和**解决方案**：

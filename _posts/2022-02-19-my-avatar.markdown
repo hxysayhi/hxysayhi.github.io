@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "my-avatar"
+title:  "我的头像"
 date:   2022-02-19 13:32:21 +0800
 categories: default
 permalink: /posts/2f076b02/

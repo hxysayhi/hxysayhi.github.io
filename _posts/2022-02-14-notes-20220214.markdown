@@ -2,7 +2,7 @@
 layout: post
 title:  "学海拾贝20220211"
 date:   2022-02-14 09:39:53 +0800
-categories: jekyll update
+categories: Technology notes
 permalink: /posts/7af892d2/
 tags: [writing, note]
 ---

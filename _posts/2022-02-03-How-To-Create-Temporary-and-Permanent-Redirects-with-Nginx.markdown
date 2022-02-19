@@ -2,7 +2,7 @@
 layout: post
 title:  "如何在nginx创建临时重定向和永久重定向"
 date:   2022-02-03 23:38:50 +0800
-categories: jekyll update
+categories: Technology learn
 permalink: /posts/36358949/
 tags: [note, nginx]
 ---

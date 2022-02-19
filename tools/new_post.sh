@@ -12,7 +12,7 @@ cat > ${DIR}/../_posts/${post_name} << EOF
 layout: post
 title:  "${title}"
 date:   ${post_date} +0800
-categories: jekyll update
+categories: default
 permalink: /posts/${random_addr}/
 tags: [writing]
 ---

@@ -2,7 +2,7 @@
 layout: post
 title:  "jekyll post page 生成脚本"
 date:   2022-01-26 23:34:48 +0800
-categories: jekyll update
+categories: Technology writing
 permalink: /posts/65e8b919/
 tags: [writing, jekyll]
 ---
@@ -30,7 +30,7 @@ cat > ${DIR}/../_posts/${post_name} << EOF
 layout: post
 title:  "${title}"
 date:   ${post_date} +0800
-categories: jekyll update
+categories: default
 permalink: /posts/${random_addr}/
 tags: [writing]
 ---

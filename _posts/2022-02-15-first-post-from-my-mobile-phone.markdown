@@ -2,7 +2,7 @@
 layout: post
 title:  "在手机上创建、编辑并推送的第一条内容"
 date:   2022-02-15 08:51:34 +0800
-categories: jekyll update
+categories: default
 permalink: /posts/2898f5e0/
 tags: [writing]
 ---

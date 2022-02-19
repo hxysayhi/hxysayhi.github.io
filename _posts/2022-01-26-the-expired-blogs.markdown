@@ -2,7 +2,7 @@
 layout: post
 title:  "昔日博客传送门"
 date:   2022-01-26 22:56:09 +0800
-categories: jekyll update
+categories: default
 permalink: /posts/76be18ed/
 tags: [writing, blog]
 ---

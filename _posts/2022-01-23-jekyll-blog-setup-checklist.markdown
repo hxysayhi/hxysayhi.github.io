@@ -2,7 +2,7 @@
 layout: post
 title:  "jekyll静态blog部署 checklist"
 date:   2022-01-23 12:33:55 +0800
-categories: jekyll update
+categories: Technology writing
 permalink: /posts/824d93f1/
 tags: [writing, note, jekyll]
 ---

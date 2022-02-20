@@ -4,7 +4,7 @@ title:  "在手机上创建、编辑并推送的第一条内容"
 date:   2022-02-15 08:51:34 +0800
 categories: default
 permalink: /posts/2898f5e0/
-tags: [writing]
+tags: [writing, tool]
 ---
 
 这是在手机上创建、编辑，并完成推送的第一条内容。 

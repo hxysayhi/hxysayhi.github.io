@@ -4,7 +4,7 @@ title:  "containerd导入本地镜像的一个小坑"
 date:   2022-01-26 23:31:24 +0800
 categories: Technology notes
 permalink: /posts/0e8b92e6/
-tags: [writing, note, container]
+tags: [IT, note, container]
 ---
 
 containerd 命令行工具为 ctr

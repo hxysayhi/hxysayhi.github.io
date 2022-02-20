@@ -4,7 +4,7 @@ title:  "学海拾贝-20220214-20220219"
 date:   2022-02-19 11:49:09 +0800
 categories: Technology notes
 permalink: /posts/1551f6df/
-tags: [writing, note]
+tags: [note]
 ---
 
 # note-20220214-20220219
@@ -131,35 +131,35 @@ $ python2 --version
 Python 2.7.18
 ```
 
-1. python2执行version输出，并将stdout重定向到 /dev/null
+2. python2执行version输出，并将stdout重定向到 /dev/null
 
 ```bash
 $ python2 --version > /dev/null
 Python 2.7.18
 ```
 
-1. python2执行version输出，并将stderr重定向到 /dev/null
+3. python2执行version输出，并将stderr重定向到 /dev/null
 
 ```bash
 $ python2 --version 2> /dev/null
 
 ```
 
-1. python3执行version输出
+4. python3执行version输出
 
 ```bash
 $ python3 --version             
 Python 3.8.9
 ```
 
-1. python3执行version输出，并将stdout重定向到 /dev/null
+5. python3执行version输出，并将stdout重定向到 /dev/null
 
 ```bash
 $ python3 --version > /dev/null
 
 ```
 
-1. python2执行version输出，并将stderr重定向到 /dev/null
+6. python3执行version输出，并将stderr重定向到 /dev/null
 
 ```bash
 $ python3 --version 2> /dev/null

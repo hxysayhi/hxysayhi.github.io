@@ -5,7 +5,7 @@ description: "问题目录：mac输入法异常; kubectl查看指定pod的最新
 date:   2022-02-19 11:49:09 +0800
 categories: Technology notes
 permalink: /posts/1551f6df/
-tags: [note]
+tags: [note, 学海拾贝]
 ---
 
 # note-20220214-20220219

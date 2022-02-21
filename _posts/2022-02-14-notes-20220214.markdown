@@ -5,7 +5,7 @@ description: "问题目录：shell script 中echo 变量时，换行丢失问题
 date:   2022-02-14 09:39:53 +0800
 categories: Technology notes
 permalink: /posts/7af892d2/
-tags: [note]
+tags: [note, 学海拾贝]
 ---
 
 # 20220124-20220214

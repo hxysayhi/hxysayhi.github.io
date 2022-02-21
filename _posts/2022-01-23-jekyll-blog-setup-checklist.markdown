@@ -1,7 +1,6 @@
 ---
 layout: post
 title:  "jekyll静态blog部署 checklist"
-tagline: "使用jekyll进行静态blog部署的流程记录"
 description: "为了便于以后进行重新部署，本文记录了使用jekyll进行静态blog部署的流程，包括从安装jekyll、创建静态blog，到实现自动化部署的流程步骤"
 date:   2022-01-23 12:33:55 +0800
 categories: Technology writing

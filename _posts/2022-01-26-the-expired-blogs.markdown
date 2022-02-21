@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "昔日博客传送门"
+description: "建立一个传送门，传送到之前的博客"
 date:   2022-01-26 22:56:09 +0800
 categories: default
 permalink: /posts/76be18ed/

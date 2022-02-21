@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "学海拾贝-20220214-20220219"
+description: "问题目录：mac输入法异常; kubectl查看指定pod的最新n行日志; 一个nginx配置实验网站; base64 编码后字符串长度变化; —version 输出内容通过stderr 输出; 强大的代码阅读工具source insight"
 date:   2022-02-19 11:49:09 +0800
 categories: Technology notes
 permalink: /posts/1551f6df/

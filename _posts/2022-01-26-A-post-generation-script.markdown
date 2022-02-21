@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "jekyll post page 生成脚本"
+description: "一个简单的脚本，用于创建新的post page，主要用于创建markdown文件、生成头部内容，生成随机短地址作为固定链接"
 date:   2022-01-26 23:34:48 +0800
 categories: Technology writing
 permalink: /posts/65e8b919/

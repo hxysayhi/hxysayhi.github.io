@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "学海拾贝20220211"
+description: "问题目录：shell script 中echo 变量时，换行丢失问题; vim 中粘贴代码，缩进错误; linux 文件拷贝，保留时间属性; unmask的作用; dlv 进行golang 调试传参数问题"
 date:   2022-02-14 09:39:53 +0800
 categories: Technology notes
 permalink: /posts/7af892d2/

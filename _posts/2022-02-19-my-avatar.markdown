@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "我的头像"
+description: "关于一个根据输入的字符串生成头像的网站"
 date:   2022-02-19 13:32:21 +0800
 categories: default
 permalink: /posts/2f076b02/

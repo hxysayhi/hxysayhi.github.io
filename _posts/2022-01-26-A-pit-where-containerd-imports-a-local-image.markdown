@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "containerd导入本地镜像的一个小坑"
+description: "containerd导入本地镜像的一个小坑，当导入的tar包没有tag信息时，会导入失败"
 date:   2022-01-26 23:31:24 +0800
 categories: Technology notes
 permalink: /posts/0e8b92e6/

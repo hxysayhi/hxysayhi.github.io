@@ -30,6 +30,7 @@ cat > ${DIR}/../_posts/${post_name} << EOF
 ---
 layout: post
 title:  "${title}"
+description: ""
 date:   ${post_date} +0800
 categories: default
 permalink: /posts/${random_addr}/

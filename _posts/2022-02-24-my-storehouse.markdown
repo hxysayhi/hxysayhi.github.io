@@ -5,7 +5,7 @@ description: "一个小仓库，部署一些小游戏、小工具：暗黑小屋
 date:   2022-02-24 23:09:55 +0800
 categories: default
 permalink: /posts/efd7150a/
-tags: [writing]
+tags: [writing, tool]
 ---
 
 搞了一个[小仓库]({{ site.url }}/blog/storehouse)，用来放一些小游戏、小工具、小玩意儿。

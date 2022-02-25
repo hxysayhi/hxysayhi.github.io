@@ -1,6 +1,6 @@
 ---
 title: Storehouse
-icon: fas fa-info-circle
+icon: fas fa-cubes
 order: 5
 ---
 
@@ -26,4 +26,6 @@ order: 5
 ![excalidraw](/pic/storehouse/excalidraw.png)
 
 ![excalidraw](/pic/storehouse/excalidraw-show.png)
+
+如果用chrome浏览器的话，还支持作为PWA应用进行安装呐！安装按钮就在地址栏右侧靠近收藏为书签小按钮和分享此页面小按钮的旁边！
 

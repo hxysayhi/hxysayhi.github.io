@@ -20,7 +20,7 @@ tags: [writing, tool]
 [小仓库]({{ site.url }}/blog/storehouse)
 ---
 
-### 暗黑小屋 Dark Room
+### [暗黑小屋 Dark Room]({{ site.url }}/game)
 
 这是一款简约文本冒险游戏，经营自己的小屋，增加人口、收集物质，探索静谧的森林。。。
 
@@ -28,18 +28,18 @@ tags: [writing, tool]
 
 游戏的终点是发射火箭，去往星辰大海，支持多种语言。
 
-![dark room](/pic/storehouse/darkroom.png)
+[![dark room](/pic/storehouse/darkroom.png)]({{ site.url }}/game)
 
 
-### 手绘风格在线画图工具
+### [手绘风格在线画图工具](https://draw.hxysayhi.com)
 
 excalidraw 是一个手绘风格在线画图工具，用了一下，还挺好用！手绘风格有点意思。然后发现，还可以自己部署！本来想着下个镜像部署在本地，但是m1芯片arm架构上运行不了amd64的镜像。于是就部署到vps上，顺手放到我的小仓库。
 
 excalidraw是一个开源项目，github仓库在[excalidraw](https://github.com/excalidraw/excalidraw)。
 
-![excalidraw](/pic/storehouse/excalidraw.png)
+[![excalidraw](/pic/storehouse/excalidraw.png)](https://draw.hxysayhi.com)
 
-![excalidraw](/pic/storehouse/excalidraw-show.png)
+[![excalidraw](/pic/storehouse/excalidraw-show.png)](https://draw.hxysayhi.com)
 
 
 

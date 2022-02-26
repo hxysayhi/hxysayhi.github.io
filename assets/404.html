@@ -2,6 +2,7 @@
 layout: page
 title: "404: Page not found"
 permalink: /404.html
+lang: zh-CN
 
 redirect_from:
   - /norobots/
@@ -10,6 +11,10 @@ redirect_from:
 ---
 
 {% include lang.html %}
+
+{% if site.data.locales[page.lang] %}
+  {% assign lang = page.lang %}
+{% endif %}
 
 <div class="lead">
 

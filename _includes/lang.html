@@ -1,10 +1,27 @@
 {% comment %}
 Detect appearance language and return it through variable "lang"
 {% endcomment %}
-{% if site.data.locales[page.lang] %}
-  {% assign lang = page.lang %}
-{% elsif site.data.locales[site.lang] %}
+
+{% if site.data.locales[site.lang] %}
   {% assign lang = site.lang %}
 {% else %}
   {% assign lang = 'en' %}
+{% endif %}
+
+
+{% if site.data.locales[page.lang] %}
+  {% assign content_lang = page.lang %}
+{% elsif site.data.locales[site.post_lang] %}
+  {% assign content_lang = site.post_lang %}
+{% elsif site.data.locales[site.content_lang] %}
+  {% assign content_lang = site.content_lang %}
+{% else %}
+  {% assign content_lang = lang %}
+{% endif %}
+
+
+{% if site.data.locales[site.sidebar_lang] %}
+  {% assign sidebar_lang = site.sidebar_lang %}
+{% else %}
+  {% assign sidebar_lang = lang %}
 {% endif %}

@@ -7,9 +7,9 @@
 {% assign all_list = "" | split: "" %}
 
 {% for post in site.posts %}
-  {% if post.last_modified_at %}
+  {% if post.date %}
     {% capture elem %}
-      {{- post.last_modified_at | date: "%Y%m%d%H%M%S" -}}::{{- forloop.index0 -}}
+      {{- post.date | date: "%Y%m%d%H%M%S" -}}::{{- forloop.index0 -}}
     {% endcapture %}
     {% assign all_list = all_list | push: elem %}
   {% endif %}

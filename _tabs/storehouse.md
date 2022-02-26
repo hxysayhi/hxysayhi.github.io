@@ -5,7 +5,7 @@ order: 5
 ---
 
 
-- 简约文本冒险游戏 [暗黑小屋 Dark Room]({{ site.url }}/game)
+- 简约文本冒险游戏 [暗黑小屋 Dark Room](https://hxysayhi.com/game)
 - 手绘风格在线画图工具 [my excalidraw](https://draw.hxysayhi.com)
 
 ---
@@ -17,7 +17,7 @@ order: 5
 
 支持多种语言
 
-[![dark room](/pic/storehouse/darkroom.png)]({{ site.url }}/game)
+[![dark room](/pic/storehouse/darkroom.png)](https://hxysayhi.com/game)
 
 ---
 ### 手绘风格在线画图工具

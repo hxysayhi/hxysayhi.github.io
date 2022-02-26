@@ -8,12 +8,13 @@ tail_includes:
   - post-nav
   - comments
 ---
-{% if site.data.locales[page.lang] %}
+<!-- {% if site.data.locales[page.lang] %}
   {% assign lang = page.lang %}
 {% else %}
   {% include lang.html %}
-{% endif %}
+{% endif %} -->
 
+{% assign lang = 'en' %}
 
 {% if page.image.src %}
   {% capture bg %}

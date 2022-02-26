@@ -16,7 +16,6 @@ tags: [writing, tool]
 
 ---
 
-
 [小仓库]({{ site.url }}/blog/storehouse)
 ---
 

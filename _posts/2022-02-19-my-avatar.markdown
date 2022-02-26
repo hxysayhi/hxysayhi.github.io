@@ -13,7 +13,6 @@ tags: [writing, tool]
 ![multiavatar](/pic/2f076b02/Snipaste_2022-02-19_14-06-51.png)
 
 于是就生成了现在的头像：  
-
 **Hxysayhi**
 
 ![Hxysayhi](https://api.multiavatar.com/Hxysayhi.svg)

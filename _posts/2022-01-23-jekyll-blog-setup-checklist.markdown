@@ -6,6 +6,7 @@ date:   2022-01-23 12:33:55 +0800
 categories: Technology writing
 permalink: /posts/824d93f1/
 tags: [IT, note, jekyll]
+preview: "为了便于以后进行重新部署，本文记录了使用jekyll进行静态blog部署的流程，包括从安装jekyll、创建静态blog，到实现自动化部署的流程步骤..."
 ---
 1. 安装jekyll
 
@@ -67,7 +68,7 @@ tags: [IT, note, jekyll]
 
 
 
-1. vps上部署git仓库，配置hook实现自动部署blog能力(参考[https://jekyllrb.com/docs/deployment/automated/](https://jekyllrb.com/docs/deployment/automated/))
+3. vps上部署git仓库，配置hook实现自动部署blog能力(参考[https://jekyllrb.com/docs/deployment/automated/](https://jekyllrb.com/docs/deployment/automated/))
 
 
     3.1 创建git用户，并配置权限
@@ -121,7 +122,7 @@ tags: [IT, note, jekyll]
 
 
 
-2. vps上部署nginx
+4. vps上部署nginx
    
     4.1 部署nginx
 

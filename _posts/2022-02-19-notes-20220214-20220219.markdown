@@ -14,9 +14,8 @@ tags: [note, 学海拾贝]
 2. `kubectl` 查看指定pod的最新n行日志
 3. 一个nginx配置实验网站
 4. base64 编码后字符串长度变化
-5. —version 输出内容通过stderr 输出
+5. version 输出内容通过stderr 输出
 6. 强大的代码阅读工具source insight
-
 ---
 
 ## mac 输入法异常，出现两个输入候选框

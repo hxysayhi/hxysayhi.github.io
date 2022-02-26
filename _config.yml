@@ -174,3 +174,5 @@ jekyll-archives:
   permalinks:
     tag: /tags/:name/
     category: /categories/:name/
+
+excerpt_separator: <!--more-->

@@ -10,7 +10,7 @@ tags: [writing, tool]
 
 搞了一个[小仓库]({{ site.url }}/blog/storehouse)，用来放一些小游戏、小工具、小玩意儿。
 
-- 简约文本冒险游戏 [暗黑小屋 Dark Room]({{ site.url }}/game)
+- 简约文本冒险游戏 [暗黑小屋 Dark Room](https://hxysayhi.com/game)
 
 - 手绘风格在线画图工具 [my excalidraw](https://draw.hxysayhi.com)
 
@@ -19,7 +19,7 @@ tags: [writing, tool]
 [小仓库]({{ site.url }}/blog/storehouse)
 ---
 
-### [暗黑小屋 Dark Room]({{ site.url }}/game)
+### [暗黑小屋 Dark Room](https://hxysayhi.com/game)
 
 这是一款简约文本冒险游戏，经营自己的小屋，增加人口、收集物质，探索静谧的森林。。。
 
@@ -27,7 +27,7 @@ tags: [writing, tool]
 
 游戏的终点是发射火箭，去往星辰大海，支持多种语言。
 
-[![dark room](/pic/storehouse/darkroom.png)]({{ site.url }}/game)
+[![dark room](/pic/storehouse/darkroom.png)](https://hxysayhi.com/game)
 
 
 ### [手绘风格在线画图工具](https://draw.hxysayhi.com)

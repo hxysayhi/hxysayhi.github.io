@@ -1,0 +1,232 @@
+---
+layout: post
+title:  "notes-20220221-20220227"
+description: "本周记录的一些零散问题，主要包括：1. docker run 覆盖原有entrypoint; 2. docker 拉取指定架构的镜像; 3. vim块模式进行批量操作; 4. nginx proxy_pass; 5. docker latest标签; 6. mac chrome强制刷新; 7. 命令行修改密钥密码"
+date:   2022-02-27 23:01:11 +0800
+categories: Technology notes
+permalink: /posts/b45982ff/
+tags: [notes, IT]
+preview: "本周记录的一些零散问题，主要包括：1. docker run 覆盖原有entrypoint; 2. docker 拉取指定架构的镜像; 3. vim块模式进行批量操作; 4. nginx proxy_pass; 5. docker latest标签; 6. mac chrome强制刷新; 7. 命令行修改密钥密码"
+---
+
+### 内容目录
+
+1. docker run 覆盖原有entrypoint
+2. docker 拉取指定架构的镜像
+3. vim块模式进行批量操作
+4. nginx proxy_pass
+5. docker latest标签
+6. mac chrome强制刷新
+7. 命令行修改密钥密码
+
+---
+
+### 1. docker run 覆盖原有entrypoint
+
+使用 `--entrypoint`
+
+```bash
+docker run --entrypoint <new command> [docker_image]
+```
+
+以命令行交互模式运行容器进行交互操作：
+
+```bash
+docker run -it --entrypoint /bin/bash [docker_image]
+```
+
+更多信息，比如对于 entrypoint 和 cmd 的区别等，可参考：
+
+- [https://docs.docker.com/engine/reference/run/#entrypoint-default-command-to-execute-at-runtime](https://docs.docker.com/engine/reference/run/#entrypoint-default-command-to-execute-at-runtime)
+- [https://phoenixnap.com/kb/docker-run-override-entrypoint](https://phoenixnap.com/kb/docker-run-override-entrypoint)
+- [https://yeasy.gitbook.io/docker_practice/image/dockerfile/entrypoint](https://yeasy.gitbook.io/docker_practice/image/dockerfile/entrypoint)
+- [https://www.bmc.com/blogs/docker-cmd-vs-entrypoint/](https://www.bmc.com/blogs/docker-cmd-vs-entrypoint/)
+
+---
+
+### 2. docker 拉取指定架构的镜像
+
+- 容器技术与虚拟机技术的区别，是否对宿主机架构、指令集直接依赖
+
+虚拟机技术在宿主机上通过虚拟化技术模拟硬件设备，虚拟机运行在虚拟化层之上，仿佛自己运行在物理机上一般。每台虚拟机有自己的内核，有自己的操作系统在运行。我们可以通过虚拟化技术虚拟化出与底层不同架构的硬件，比如在x86平台虚拟化ARM平台，运行ARM架构的操作系统。比如这篇文章介绍了如何通过Qemu来实现在x86平台模拟运行ARM系统。
+
+ref：[https://cloud.tencent.com/developer/article/1823083](https://cloud.tencent.com/developer/article/1823083)
+
+ 容器本质上是有特殊限制的进程，依赖的是宿主机内核，宿主机操作系统。因此尽管容器技术可以做到一处打包处处运行的便捷性，但是需要确保运行的镜像指令集与宿主机操作系统一致。
+
+因此我们需要使用与宿主机具有相同架构的镜像进行使用。
+
+关于虚拟机技术和容器技术的演进、差别的更多信息可以在kubernetes in action查看学习。
+
+- 多架构支持
+
+docker镜像可以支持多架构，也就是说一个镜像可以有不同的架构、不同的操作系统的变体。当我们运行一个支持多架构的镜像时，docker会自动选择与宿主机的操作系统和架构契合的镜像变体。
+
+ref：[https://docs.docker.com/desktop/multi-arch/](https://docs.docker.com/desktop/multi-arch/)
+
+- docker pull 命令行拉取指定架构
+
+我们也可以通过`--platform` 参数指定镜像的系统和架构，或者通过指定镜像的sha256值（摘要）来使用指定的镜像。
+
+方法一：使用`--platform` 参数：
+
+```bash
+docker pull --platform linux/arm64 alpine:latest
+```
+
+方法二：指定镜像的sha256值（摘要）
+
+首先列出所有支持的架构，然后指定sha256值（摘要）进行拉取。例如：
+
+```bash
+# list all supported architectures (manifest):
+$ docker manifest inspect ckulka/multi-arch-example
+{
+   "schemaVersion": 2,
+   "mediaType": "application/vnd.docker.distribution.manifest.list.v2+json",
+   "manifests": [
+      {
+         "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
+         "size": 2200,
+         "digest": "sha256:6eaeab9bf8270ce32fc974c36a15d0bac4fb6f6cd11a0736137c4248091b3646",
+         "platform": {
+            "architecture": "amd64",
+            "os": "linux"
+         }
+      },
+      {
+         "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
+         "size": 2413,
+         "digest": "sha256:f02e0fd2918a894ecd49d67b802c22082dc3c6424f6566e1753a83ba833b0993",
+         "platform": {
+            "architecture": "arm",
+            "os": "linux",
+            "variant": "v5"
+         }
+      },
+...
+
+# pull by digest, e.g. arm arch (pulled on linux machine):
+$  docker pull ckulka/multi-arch-example@sha256:f02e0fd2918a894ecd49d67b802c22082dc3c6424f6566e1753a83ba833b0993
+```
+
+ref：[https://stackoverflow.com/questions/60114854/pull-docker-image-for-different-architecture/60116565](https://stackoverflow.com/questions/60114854/pull-docker-image-for-different-architecture/60116565)
+
+拉取之后，可以用`docker inspect` 验证一下镜像架构。
+
+---
+
+### 3. vim块模式进行批量操作
+
+Ctrl + v 可以进入块选择模式，进入块模式后，可以进行批量插入、删除、替换等操作。
+
+- 进入块模式，选取操作块
+    1. 光标定位到要操作的地方
+    2. CTRL+v 进入“可视 块”模式
+    3. 移动光标选取要操作的行和列
+- 批量插入（按列插入）
+    1. 进入块模式完成要块选取
+    2. shift + i （即大写 I ）进入输入模式
+    3. 输入要批量插入的内容
+    4. 按两次 ESC 键，完成插入
+- 批量删除
+    1. 在进入块模式完成选择后，按d进行删除
+- 批量替换
+    1. 进入块模式，完成需要操作的行的选取
+    2. 按“:”，输入s/待替换内容/替换内容/g，回车 ，完成替换
+
+---
+
+### 4. Nginx proxy_pass
+
+通过`proxy_pass`可以设置代理转发，将匹配到指定URI的内容转发的代理的上游服务。
+
+```
+location /some_dir/ {
+    proxy_pass 上游服务;
+}
+```
+
+而转发时的URI是否包含匹配的前缀，取决于配置上游服务时，是否有 `/`
+
+**转发不带前缀**:
+
+```
+location /some_dir/ {
+    proxy_pass http://some_server/;
+}
+
+```
+
+如果配置时，以`/` 结束，则按如下规则转发:
+
+```
+http:// your_server/some_dir/ some_subdir/some_file ->
+http:// some_server/          some_subdir/some_file
+
+```
+
+也就是, `/some_dir/` 被 `/` 替换，将 `/some_dir/some_subdir/some_file` 变为 `/some_subdir/some_file`.
+
+**转发带前缀**:
+
+```
+location /some_dir/ {
+    proxy_pass http://some_server;
+}
+
+```
+
+上游服务配置时不以`/` 结束，则按如下规则替换:
+
+```
+http:// your_server /some_dir/some_subdir/some_file ->
+http:// some_server /some_dir/some_subdir/some_file
+
+```
+
+也就是, 按原URI传递，不进行替换变化。
+
+ref1:[https://stackoverflow.com/questions/32542282/how-do-i-rewrite-urls-in-a-proxy-response-in-nginx](https://stackoverflow.com/questions/32542282/how-do-i-rewrite-urls-in-a-proxy-response-in-nginx)
+
+ref2: [https://www.jianshu.com/p/b010c9302cd0](https://www.jianshu.com/p/b010c9302cd0)
+
+---
+
+### 5. docker latest标签
+
+docker 的 latest 标签没有什么特殊之处，就是一个普通的标签，只是我们通常约定将最新版本的镜像打上 latest 标签。当实际上有 latest 标签的镜像可能根本不是最新的镜像，这只是一个约定，而没有机制上的保证。当我们进行操作时没有指定标签，docker 会自动加上 latest 标签进行操作。
+
+可以通过如下命令查看拉取的 latest 镜像的真正版本：
+
+```bash
+docker image inspect the-image:latest | grep -i version
+```
+
+ref:
+
+- [https://www.hi917.com/detail/105.html](https://www.hi917.com/detail/105.html)
+- [https://linux.cn/article-4772-1.html](https://linux.cn/article-4772-1.html)
+- [https://www.cnblogs.com/junejs/p/12686766.html#:~:text=latest是默认的标签,的标识，这是约定。](https://www.cnblogs.com/junejs/p/12686766.html#:~:text=latest%E6%98%AF%E9%BB%98%E8%AE%A4%E7%9A%84%E6%A0%87%E7%AD%BE,%E7%9A%84%E6%A0%87%E8%AF%86%EF%BC%8C%E8%BF%99%E6%98%AF%E7%BA%A6%E5%AE%9A%E3%80%82)
+
+---
+
+### 6. mac chrome强制刷新
+
+- 普通刷新：command ＋r
+- 强制刷新：command＋shift＋r
+- 删除cookie等：command＋shift＋del ，然后点击 清除数据，注意勾选选择要清楚的选项
+
+---
+
+### 7. 命令行修改密钥密码
+
+```bash
+$ ssh-keygen -p
+Enter file in which the key is (/Users/xxxx/.ssh/id_rsa): 
+Enter old passphrase: 
+Key has comment 'xxxxxxxxxxxxxx'
+Enter new passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved with the new passphrase.
+```

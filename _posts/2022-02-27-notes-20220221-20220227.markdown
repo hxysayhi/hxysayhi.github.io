@@ -1,12 +1,12 @@
 ---
 layout: post
 title:  "学海拾贝-20220221-20220227"
-description: "本周记录的一些零散问题，主要包括：1. docker run 覆盖原有entrypoint; 2. docker 拉取指定架构的镜像; 3. vim块模式进行批量操作; 4. nginx proxy_pass; 5. docker latest标签; 6. mac chrome强制刷新; 7. 命令行修改密钥密码"
+description: "本周记录的一些零散问题或知识点，主要包括：1. docker run 覆盖原有entrypoint; 2. docker 拉取指定架构的镜像; 3. vim块模式进行批量操作; 4. nginx proxy_pass; 5. docker latest标签; 6. mac chrome强制刷新; 7. 命令行修改密钥密码"
 date:   2022-02-27 23:01:11 +0800
 categories: Technology notes
 permalink: /posts/b45982ff/
 tags: [notes, IT]
-preview: "本周记录的一些零散问题，主要包括：1. docker run 覆盖原有entrypoint; 2. docker 拉取指定架构的镜像; 3. vim块模式进行批量操作; 4. nginx proxy_pass; 5. docker latest标签; 6. mac chrome强制刷新; 7. 命令行修改密钥密码"
+preview: "本周记录的一些零散问题或知识点，主要包括：1. docker run 覆盖原有entrypoint; 2. docker 拉取指定架构的镜像; 3. vim块模式进行批量操作; 4. nginx proxy_pass; 5. docker latest标签; 6. mac chrome强制刷新; 7. 命令行修改密钥密码"
 ---
 
 ### 内容目录

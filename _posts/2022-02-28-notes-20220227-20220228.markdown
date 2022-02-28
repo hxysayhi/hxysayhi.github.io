@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "学海拾贝-20220227"
+title:  "学海拾贝-20220227-20220228"
 description: "部分问题记录：1.git merge 时不对message进行确认；2. Windows上用户名不区分大小写；3. 蓝绿部署、红黑部署、灰度发布 ；4. docker no space left on device；5. LVM进行逻辑卷扩容"
 date:   2022-02-28 22:49:22 +0800
 categories: Technology notes

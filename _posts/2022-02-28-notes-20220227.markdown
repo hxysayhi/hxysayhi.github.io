@@ -138,7 +138,7 @@ ref：
 - **物理块（physical extent）PE：**每一个物理卷被划分为称为PE(Physical Extents)的基本单元，具有唯一编号的PE是可以被LVM寻址的最小单元。PE的大小是可配置的，默认为4MB。
 - **逻辑块（logical extent）LE：**逻辑卷也被划分为被称为LE(Logical Extents) 的可被寻址的基本单位。在同一个卷组中，LE的大小和PE是相同的，并且一一对应。
 
-![Untitled](note-20220%20fd3af/Untitled.png)
+![LVM](/pic/f5723b2d/lvm.png)
 
 **LVM的管理命令：**
 

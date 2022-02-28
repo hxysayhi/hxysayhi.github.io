@@ -1,0 +1,224 @@
+---
+layout: post
+title:  "学海拾贝-20220227"
+description: "部分问题记录：1.git merge 时不对message进行确认；2. Windows上用户名不区分大小写；3. 蓝绿部署、红黑部署、灰度发布 ；4. docker no space left on device；5. LVM进行逻辑卷扩容"
+date:   2022-02-28 22:49:22 +0800
+categories: Technology notes
+permalink: /posts/f5723b2d/
+tags: [notes, IT]
+preview: ""
+---
+
+### 问题目录
+
+1. git merge 时不对message进行确认
+2. Windows上用户名不区分大小写
+3. 蓝绿部署、红黑部署、灰度发布
+4. docker no space left on device
+5. LVM进行逻辑卷扩容
+
+---
+
+### 1. git merge 时不对message进行确认
+
+在进行 `git merge` 时会默认进入一个编辑 merge message 的编辑交互中，但是我们有时不希望进行内容变更或不希望进行交互编辑。
+
+如果是不进行内容变更，可以使用 `--no-edit` :
+
+```bash
+git merge test-branch --no-edit
+```
+
+如果是不希望进行交互编辑，可以使用 `-m` 在 merge 时指定 message 内容：
+
+```bash
+git merge test-branch -m "the message that you want to commit"
+```
+
+ref: [https://git-scm.com/docs/git-merge](https://git-scm.com/docs/git-merge)
+
+---
+
+### 2. Windows上用户名不区分大小写
+
+Windows 下的用户名不区分大小写；但是，密码区分大小写。
+
+linux 下的用户名区分大小写。
+
+---
+
+### 3. 蓝绿部署、红黑部署、灰度发布
+
+- 蓝绿部署
+    
+    在蓝绿色部署中，维护两套服务：“蓝色”服务和“绿色”服务。在任意时刻，只有一套服务被用于处理请求。另一套服务处于闲置状态。
+    
+    进行新版本发布时，我们可以先将闲置状态的服务进行升级，再将生产流量从另一套服务切换过来。蓝绿没有什么特殊含义，只是为了便于区别和表述，我们可以将工作中的服务环境称为蓝色环境，而将闲置环境称为绿色环境。将绿环境部署新版本服务后，进行流量切换。一旦生产流量从蓝色完全转移到绿色，蓝色就可以在回滚或退出生产的情况下保持待机，也可以更新成为下次更新的模板。
+    
+    ref：
+    
+    - [https://en.wikipedia.org/wiki/Blue-green_deployment](https://en.wikipedia.org/wiki/Blue-green_deployment)
+    - [https://docs.cloudfoundry.org/devguide/deploy-apps/blue-green.html](https://docs.cloudfoundry.org/devguide/deploy-apps/blue-green.html)
+    - [https://www.redhat.com/en/topics/devops/what-is-blue-green-deployment](https://www.redhat.com/en/topics/devops/what-is-blue-green-deployment)
+- 红黑部署
+    
+    与蓝绿部署类似，红黑发布也是通过两个集群完成软件版本的升级。
+    
+    当前提供服务的所有机器都运行在红色集群 A 中，当需要发布新版本的时候，具体流程是这样的：
+    
+    - 先在云上申请一个黑色集群 B，在 B 上部署新版本的服务；
+    - 等到 B 升级完成后，我们一次性地把负载均衡全部指向 B；
+    - 把 A 集群从负载均衡列表中删除，并释放集群 A 中所有机器。
+    
+    这样就完成了一个版本的升级。
+    
+    同样红黑也只是为了便于表述。
+    
+    ref：
+    
+    - [https://stackoverflow.com/questions/45259589/whats-the-difference-between-red-black-deployment-and-blue-green-deployment](https://stackoverflow.com/questions/45259589/whats-the-difference-between-red-black-deployment-and-blue-green-deployment)
+    - [https://octopus.com/blog/blue-green-red-black](https://octopus.com/blog/blue-green-red-black)
+- 灰度发布
+    
+    灰度发布，也被叫作金丝雀发布。与蓝绿部署、红黑部署不同的是，灰度发布属于增量发布方法。也就是说，服务升级的过程中，新旧版本会同时为用户提供服务。
+    
+    灰度发布的具体流程是这样的：在集群的一小部分机器上部署新版本，给一部分用户使用， 以测试新版本的功能和性能；确认没有问题之后，再对整个集群进行升级。简单地说，灰度发布就是把部署好的服务分批次、逐步暴露给越来越多的用户，直到最终完全上线。
+    
+    ref：
+    
+    - [https://harness.io/blog/blue-green-canary-deployment-strategies/](https://harness.io/blog/blue-green-canary-deployment-strategies/)
+    - [https://martinfowler.com/bliki/CanaryRelease.html](https://martinfowler.com/bliki/CanaryRelease.html)
+
+---
+
+### 4. docker no left space on device
+
+**问题描述：**
+
+docker导入镜像时，报错：docker no left space on device
+
+但是docker 存储镜像等内容的分区没有更多的空间可以清理出来供其使用了。
+
+**解决方案：**
+
+`docker system prune`
+
+执行后会收到提示：
+
+```
+WARNING! This will remove:
+  - all stopped containers
+  - all networks not used by at least one container
+  - all dangling images
+  - all dangling build cache
+
+Are you sure you want to continue? [y/N]
+```
+
+如果继续执行，将会进行永久性的清理。
+
+根据 [docker 提供的最佳实践建议]（[https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#create-ephemeral-containers](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#create-ephemeral-containers)），容器的定位应该是短暂生命周期的，意味着可以随时停止并删除。因此清理掉停止的容器应是安全的。
+
+ref：
+
+[https://jhooq.com/docker-error-no-space-left/](https://jhooq.com/docker-error-no-space-left/)
+
+[https://stackoverflow.com/questions/30604846/docker-error-no-space-left-on-device](https://stackoverflow.com/questions/30604846/docker-error-no-space-left-on-device)
+
+---
+
+### 5. LVM 进行逻辑卷扩容
+
+**术语：**
+
+- **物理存储介质（The physical media）：**这里指系统的存储设备：硬盘，如：/dev/hda1、/dev/sda等等，是存储系统最低层的存储单元。
+- **物理卷（physical volume）PV：**物理卷就是指硬盘分区或从逻辑上与磁盘分区具有同样功能的设备(如RAID)，是LVM的基本存储逻辑块，但和基本的物理存储介质（如分区、磁盘等）比较，却包含有与LVM相关的管理参数。
+- **卷组（Volume Group）VG：**LVM卷组类似于非LVM系统中的物理硬盘，其由物理卷组成。可以在卷组上创建一个或多个“LVM分区”（逻辑卷），LVM卷组由一个或多个物理卷组成。
+- **逻辑卷（logical volume）LV：**LVM的逻辑卷类似于非LVM系统中的硬盘分区，在逻辑卷之上可以建立文件系统(比如/home或者/usr等)。
+- **物理块（physical extent）PE：**每一个物理卷被划分为称为PE(Physical Extents)的基本单元，具有唯一编号的PE是可以被LVM寻址的最小单元。PE的大小是可配置的，默认为4MB。
+- **逻辑块（logical extent）LE：**逻辑卷也被划分为被称为LE(Logical Extents) 的可被寻址的基本单位。在同一个卷组中，LE的大小和PE是相同的，并且一一对应。
+
+![Untitled](note-20220%20fd3af/Untitled.png)
+
+**LVM的管理命令：**
+
+| 功能 | 物理卷管理（pv） | 卷组管理（vg） | 逻辑卷管理（lv） |
+| --- | --- | --- | --- |
+| 扫描（scan） | pvscan | vgscan | lvscan |
+| 创建（create） | pvcreate | vgcreate | lvcreate |
+| 显示（display） | pvdisplay | vgdisplay | lvdisplay |
+| 删除（remove） | pvremove | vgremove | lvremove |
+| 扩展（extend） | — | vgextend | lvextend |
+| 缩减（reduce） | — | vgreduce | lvreduce |
+
+**逻辑卷扩容步骤**
+
+1. `vgdisplay` 查看卷组情况
+
+```bash
+--- Volume group ---
+  VG Name               volume-group1
+  System ID
+  Format                lvm2
+  Metadata Areas        3
+  Metadata Sequence No  1
+  VG Access             read/write
+  VG Status             resizable
+  MAX LV                0
+  Cur LV                0
+  Open LV               0
+  Max PV                0
+  Cur PV                3
+  Act PV                3
+  VG Size               168.00 GiB
+  PE Size               4.00 MiB
+  Total PE              774
+  Alloc PE / Size       21248 / 83.00 GiB
+  Free  PE / Size       21760 / 85.00 GiB
+  VG UUID               bwd2pS-fkAz-lGVZ-qc7C-TaKv-fFUC-IzGNBK
+```
+
+可以看到 Free 空间大小
+
+1. 在Free空间范围内进行扩容分配，使用命令 `lvextend -L +${extend_size} ${target_lv}` ,其中`${extend_size}` 为待扩容的大小，为数值加上单位，比如 `10G` , `${target_lv}` 为待扩容的逻辑卷
+2. 调整分区：
+    - 查看文件系统类型
+    
+    ```bash
+    mount |grep ${target_lv}
+    
+    ```
+    
+    或者
+    
+    ```bash
+    cat /etc/fstab | grep ${target_lv}
+    ```
+    
+    - 如果 type 不为 `xfs`,  则使用 `resize2fs` 进行调整即可: `resize2fs ${target_lv}`
+    
+          如果对 xfs 类型的 fs 执行 resize2fs ，会出现如下报错：
+    
+    ```bash
+    resize2fs: Bad magic number in super-block while trying to open xxxxxxxxxx
+    Couldn't find valid filesystem superblock.
+    ```
+    
+    - 如果 type 为 `xfs` , 则使用 `xfs_growfs` 命令：`xfs_growfs ${target_lv}`
+3. `df -h` 查看挂载点，看看大小是否已经成功改变。
+
+ref:
+
+关于LVM：
+
+- [https://www.cnblogs.com/shoufeng/p/10615452.html](https://www.cnblogs.com/shoufeng/p/10615452.html)
+- [https://www.yisu.com/zixun/3865.html](https://www.yisu.com/zixun/3865.html)
+- [https://opensource.com/business/16/9/linux-users-guide-lvm](https://opensource.com/business/16/9/linux-users-guide-lvm)
+- [https://linux.cn/article-3218-1.html](https://linux.cn/article-3218-1.html)
+
+关于resize2fs error处理：
+
+- [https://stackoverflow.com/questions/26305376/resize2fs-bad-magic-number-in-super-block-while-trying-to-open](https://stackoverflow.com/questions/26305376/resize2fs-bad-magic-number-in-super-block-while-trying-to-open)
+- [https://cloud.tencent.com/developer/article/1491805](https://cloud.tencent.com/developer/article/1491805)
+- [https://blog.90.vc/archives/164](https://blog.90.vc/archives/164)
+- [https://www.cnblogs.com/-abm/p/11349240.html](https://www.cnblogs.com/-abm/p/11349240.html)

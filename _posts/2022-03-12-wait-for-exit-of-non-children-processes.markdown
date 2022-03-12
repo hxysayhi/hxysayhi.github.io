@@ -66,7 +66,7 @@ ref：
 
 找到三种方式：
 
-1. 利用 kill 探测进程的存活情况
+1.利用 kill 探测进程的存活情况
 
 调用 `kill(pid, 0)`， 如果返回值是 -1， 而且 errno 是 ESRCH ，就表示进程已经结束退出。  
 这个方法也可以用在命令行中：
@@ -75,7 +75,7 @@ ref：
 或者也可以使用探测 /proc/$pid 是否存在的方式来探知。
 同样在命令行中利用 ps 等命令检索也可以达到目的。
 
-2. 使用 `pidfd_open` 来在任意进程结束时获得通知
+2.使用 `pidfd_open` 来在任意进程结束时获得通知
 
 从 linux kernel 5.3 开始系统调用 pidfd_open 可以对给定的 pid 创建一个文件描述符。 这个文件描述符可以用于执行poll操作，在进程退出时获得notification。
 
@@ -139,9 +139,9 @@ The program below opens a PID file descriptor for the process whose PID is speci
 
 ```
 
-3. 使用 ptrace  attach 到想要 wait 的进程上。但是这个会对被 attach 的进程造成一定的影响，像性能影响什么的。
+3.使用 ptrace  attach 到想要 wait 的进程上。但是这个会对被 attach 的进程造成一定的影响，像性能影响什么的。
 
-4. 配置CONFIG_PROC_EVENTS，使用Report process events to userspace的特性在进程结束时获得通知。
+4.配置CONFIG_PROC_EVENTS，使用Report process events to userspace的特性在进程结束时获得通知。
 
 这种方式在 github 有相关的项目实现，可以[参考](https://github.com/stormc/waitforpid/blob/master/waitforpid.c).
 

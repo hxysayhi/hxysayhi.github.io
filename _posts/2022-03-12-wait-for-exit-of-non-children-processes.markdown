@@ -79,7 +79,6 @@ ref：
 
 从 linux kernel 5.3 开始系统调用 pidfd_open 可以对给定的 pid 创建一个文件描述符。 这个文件描述符可以用于执行poll操作，在进程退出时获得notification。
 
-
 参考[man手册](https://man7.org/linux/man-pages/man2/pidfd_open.2.html),使用方法如下：
 
 ```

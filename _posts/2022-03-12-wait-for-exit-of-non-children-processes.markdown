@@ -6,7 +6,7 @@ date:   2022-03-12 22:35:18 +0800
 categories: Technology notes
 permalink: /posts/2c936b7c/
 tags: [IT, linux, process, waitpid, pidfd_open, configProcEvents]
-preview："内容摘要： 1. 为什么waitpid只能针对子进程使用？ 2. 利用 kill 命令探测进程的存活情况 3. 使用pidfd_open 来在任意进程结束时获得通知 4. 配置CONFIG_PROC_EVENTS，使用Report process events to userspace的特性在进程结束时获得通知 5. 有什么方法可以改变进程的父进程？"
+preview: "内容摘要： 1. 为什么waitpid只能针对子进程使用？ 2. 利用 kill 命令探测进程的存活情况 3. 使用pidfd_open 来在任意进程结束时获得通知 4. 配置CONFIG_PROC_EVENTS，使用Report process events to userspace的特性在进程结束时获得通知 5. 有什么方法可以改变进程的父进程？"
 ---
 
 ### 背景

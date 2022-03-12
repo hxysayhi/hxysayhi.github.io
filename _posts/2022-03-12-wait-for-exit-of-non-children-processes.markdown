@@ -58,7 +58,7 @@ ref：
 
 既然 wait 系列函数只能用于非子进程，那么如果可以改变 进程的父进程，也就可以对原本不是 子进程的进程使用 wait 系列函数。那有没有什么方法可以改变子进程的父进程？
 
-根据[这个回答](https://unix.stackexchange.com/questions/193902/change-the-parent-process-of-a-process#:~:text=The%20parent%20process%20id%20(ppid,that%20the%20parent%20was%20terminated.)，在系统内核外是不能对 进程的父进程信息进行配置修改的，而系统并没有提供相关的系统调用来完成这样的操作。内核只会在进程的父进程退出后，将子进程的 ppid 改为 1 号进程。
+根据[这个回答](https://unix.stackexchange.com/a/193918/330548)，在系统内核外是不能对 进程的父进程信息进行配置修改的，而系统并没有提供相关的系统调用来完成这样的操作。内核只会在进程的父进程退出后，将子进程的 ppid 改为 1 号进程。
 
 ### 能否监测非子进程的退出或状态变化？
 

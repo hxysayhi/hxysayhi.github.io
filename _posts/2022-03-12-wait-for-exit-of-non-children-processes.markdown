@@ -58,7 +58,7 @@ ref：
 
 既然 wait 系列函数只能用于非子进程，那么如果可以改变 进程的父进程，也就可以对原本不是 子进程的进程使用 wait 系列函数。那有没有什么方法可以改变子进程的父进程？
 
-根据[这个回答](https://unix.stackexchange.com/questions/193902/change-the-parent-process-of-a-process#:~:text=The%20parent%20process%20id%20(ppid,that%20the%20parent%20was%20terminated.)，在系统内核外是不能对 进程的父进程信息进行配置修改的，而系统并没有提供相关的系统调用来完成这样的操作。内核只会在进程的父进程退出后，将子进程的 ppid 改为 1 号进程。
+根据[这个回答](https://unix.stackexchange.com/a/193918/330548)，在系统内核外是不能对 进程的父进程信息进行配置修改的，而系统并没有提供相关的系统调用来完成这样的操作。内核只会在进程的父进程退出后，将子进程的 ppid 改为 1 号进程。
 
 ### 能否监测非子进程的退出或状态变化？
 
@@ -66,7 +66,7 @@ ref：
 
 找到三种方式：
 
-1. 利用 kill 探测进程的存活情况
+1.利用 kill 探测进程的存活情况
 
 调用 `kill(pid, 0)`， 如果返回值是 -1， 而且 errno 是 ESRCH ，就表示进程已经结束退出。  
 这个方法也可以用在命令行中：
@@ -75,10 +75,9 @@ ref：
 或者也可以使用探测 /proc/$pid 是否存在的方式来探知。
 同样在命令行中利用 ps 等命令检索也可以达到目的。
 
-2. 使用 `pidfd_open` 来在任意进程结束时获得通知
+2.使用 `pidfd_open` 来在任意进程结束时获得通知
 
 从 linux kernel 5.3 开始系统调用 pidfd_open 可以对给定的 pid 创建一个文件描述符。 这个文件描述符可以用于执行poll操作，在进程退出时获得notification。
-
 
 参考[man手册](https://man7.org/linux/man-pages/man2/pidfd_open.2.html),使用方法如下：
 
@@ -140,9 +139,9 @@ The program below opens a PID file descriptor for the process whose PID is speci
 
 ```
 
-3. 使用 ptrace  attach 到想要 wait 的进程上。但是这个会对被 attach 的进程造成一定的影响，像性能影响什么的。
+3.使用 ptrace  attach 到想要 wait 的进程上。但是这个会对被 attach 的进程造成一定的影响，像性能影响什么的。
 
-4. 配置CONFIG_PROC_EVENTS，使用Report process events to userspace的特性在进程结束时获得通知。
+4.配置CONFIG_PROC_EVENTS，使用Report process events to userspace的特性在进程结束时获得通知。
 
 这种方式在 github 有相关的项目实现，可以[参考](https://github.com/stormc/waitforpid/blob/master/waitforpid.c).
 

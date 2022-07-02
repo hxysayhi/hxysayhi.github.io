@@ -1,12 +1,12 @@
 ---
 layout: post
-title:  “使用make进行golang编译中的小问题及解决方案”
+title:  "使用make进行golang编译中的小问题及解决方案"
 description: "关于golang使用make 编译时候遇到的几个小问题"
 date:   2022-07-02 03:29:38 +0800
 categories: Technology notes
 permalink: /posts/61a056t8/
 tags: [IT, golang, make]
-preview: ”内容摘要: 关于golang使用make 编译时候遇到的几个小问题：编译时提示遇到时钟偏差、编译时报错no required module provides package main.go“
+preview: "内容摘要: 关于golang使用make 编译时候遇到的几个小问题：编译时提示遇到时钟偏差、编译时报错no required module provides package main.go"
 ---
 
 1. 报错信息：Clock skew detected. Your build may be incomplete.

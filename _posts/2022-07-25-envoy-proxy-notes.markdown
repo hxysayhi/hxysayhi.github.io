@@ -627,3 +627,4 @@ envoy每个版本会增加一些新的功能，可能会带来api 的变化，�
 相关内容：
 
 1. [envoy 动态路由配置信息查看](https://hxysayhi.com/blog/posts/61a05b5d/)
+2. [envoy proxy调研笔记](https://hxysayhi.com/blog/posts/pic/4a1349e1/)

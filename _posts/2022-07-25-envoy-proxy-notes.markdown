@@ -37,7 +37,7 @@ tags: [IT, k8s, ingress, envoy, proxy]
 
 ---
 
-# <span id="t1">Envoy 是什么</span>
+# <span id="t1">Envoy 是什么</span>[¶](#t1)
 
 根据[envoy官网](https://www.envoyproxy.io/)的定义，envoy是一个开源的为云原生应用而设计的边缘和服务代理（edge and service proxy）。使用c++ 编写，设计定位是用于大规模微服务服务网格架构的通用数据平面。为的是解决以下在大规模微服务场景中存在的挑战：1. 复杂异构系统中的网络维护；2. 流量监控中的困难；3.  扩缩容。
 
@@ -68,7 +68,7 @@ envoy只扮演数据平面的角色，不扮演控制平面的角色。尽管env
 
 ---
 
-# <span id="t2">envoy的基本概念和框架</span>
+# <span id="t2">envoy的基本概念和框架</span>[¶](#t2)
 
 ## 基本概念：
 
@@ -195,7 +195,7 @@ response 以与request 相反的顺序经历 http filters 和 network filters。
 - access log 记录
 - trace span 完成。trace span 描述请求的持续时间和详细信息。
 
-# <span id="t3">envoy动态配置 （xDS）</span>
+# <span id="t3">envoy动态配置 （xDS）</span>[¶](#t3)
 
 ## 概念介绍
 
@@ -268,7 +268,7 @@ contour只提供了 SotW的stream模式，这意味着cluster 和 Listener 这�
 
 ---
 
-# <span id="t4">envoy如何进行路由</span>
+# <span id="t4">envoy如何进行路由</span>[¶](#t4)
 
 envoy.filters.http.router的主要工作是查看路由表，并对请求进行相应的路由，包括转发和重定向。
 
@@ -497,7 +497,7 @@ envoy支持的负载均衡策略有（[ref](https://www.envoyproxy.io/docs/envoy
 
 ---
 
-# <span id="t5">envoy的重要组件与模型</span>
+# <span id="t5">envoy的重要组件与模型</span>[¶](#t5)
 
 ## envoy线程模型
 
@@ -558,7 +558,7 @@ CORS、CORS、健康检查、JWT认证等
 ---
 
 
-# <span id="t6">控制面选型</span>
+# <span id="t6">控制面选型</span>[¶](#t6)
 
 当前基于 envoy 提供的控制面主要有 istio、emissary-ingress（ambassador）、contour、gloo等，其中istio主要是实现 service mesh，我们想要envoy 作为 api gateway 存在，主要考察 emissary-ingress（ambassador）、contour、gloo。由于都是基于envoy 的控制面，所以他们能够提供的特性，取决于envoy本身的特性，在基本能力的支持上没有大的差异。
 
@@ -599,7 +599,7 @@ envoy每个版本会增加一些新的功能，可能会带来api 的变化，�
 
 ---
 
-# <span id="t7">envoy支持特性概览</span>
+# <span id="t7">envoy支持特性概览</span>[¶](#t7)
 
 - 自动健康探测
 - 被动健康探测

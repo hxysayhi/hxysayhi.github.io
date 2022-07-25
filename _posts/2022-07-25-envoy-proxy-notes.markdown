@@ -16,21 +16,21 @@ tags: [IT, k8s, ingress, envoy, proxy]
 本文我们将围绕以上两个方面，进行介绍，主要有以下相关内容：
 
 1. [envoy是什么？](#t1)为了解决什么问题，具有什么特点，能力边界在哪里。
-2. envoy的基本概念与框架。
+2. [envoy的基本概念与框架](#t2)。
    
     明确envoy中的基本术语，以及envoy的基本工作框架，处理流程。
     
-3. envoy的动态配置能力。控制面如何将k8s集群中的route资源描述信息动态实时地传达到envoy？
-4. envoy如何进行路由？
+3. [envoy的动态配置能力](#t3)。控制面如何将k8s集群中的route资源描述信息动态实时地传达到envoy？
+4. [envoy如何进行路由？](#t4)
    
     有了路由配置信息后，envoy如何对请求进行路由。这部分内容主要聚焦在路由能力，这个能力主要是由http route filter提供。这部分涉及到一些代码实现层面的处理以及相关数据结构。
     
-5. envoy的主要组件与模型：线程模型、常见组件、过滤器等。
-6. 控制面组件实践。
+5. [envoy的主要组件与模型](#t5)：线程模型、常见组件、过滤器等。
+6. [控制面组件实践](#t6)。
    
     对几个控制面组件的简单对比。
     
-7. envoy支持特性概览
+7. [envoy支持特性概览](#t7)
    
     为了便于评估envoy能够对哪些业务需求提供支持，简单罗列了envoy提供的功能特性。
     
@@ -68,7 +68,7 @@ envoy只扮演数据平面的角色，不扮演控制平面的角色。尽管env
 
 ---
 
-# envoy的基本概念和框架
+# <span id="t2">envoy的基本概念和框架</span>
 
 ## 基本概念：
 
@@ -195,7 +195,7 @@ response 以与request 相反的顺序经历 http filters 和 network filters。
 - access log 记录
 - trace span 完成。trace span 描述请求的持续时间和详细信息。
 
-# envoy动态配置 （xDS）
+# <span id="t3">envoy动态配置 （xDS）</span>
 
 ## 概念介绍
 
@@ -268,7 +268,7 @@ contour只提供了 SotW的stream模式，这意味着cluster 和 Listener 这�
 
 ---
 
-# envoy如何进行路由
+# <span id="t4">envoy如何进行路由</span>
 
 envoy.filters.http.router的主要工作是查看路由表，并对请求进行相应的路由，包括转发和重定向。
 
@@ -497,7 +497,7 @@ envoy支持的负载均衡策略有（[ref](https://www.envoyproxy.io/docs/envoy
 
 ---
 
-# envoy的重要组件与模型
+# <span id="t5">envoy的重要组件与模型</span>
 
 ## envoy线程模型
 
@@ -558,7 +558,7 @@ CORS、CORS、健康检查、JWT认证等
 ---
 
 
-# 控制面选型
+# <span id="t6">控制面选型</span>
 
 当前基于 envoy 提供的控制面主要有 istio、emissary-ingress（ambassador）、contour、gloo等，其中istio主要是实现 service mesh，我们想要envoy 作为 api gateway 存在，主要考察 emissary-ingress（ambassador）、contour、gloo。由于都是基于envoy 的控制面，所以他们能够提供的特性，取决于envoy本身的特性，在基本能力的支持上没有大的差异。
 
@@ -599,7 +599,7 @@ envoy每个版本会增加一些新的功能，可能会带来api 的变化，�
 
 ---
 
-# envoy支持特性概览
+# <span id="t7">envoy支持特性概览</span>
 
 - 自动健康探测
 - 被动健康探测

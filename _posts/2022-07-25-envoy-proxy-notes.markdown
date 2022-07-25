@@ -15,7 +15,7 @@ tags: [IT, k8s, ingress, envoy, proxy]
 
 本文我们将围绕以上两个方面，进行介绍，主要有以下相关内容：
 
-1. envoy是什么？为了解决什么问题，具有什么特点，能力边界在哪里。
+1. [envoy是什么？](#t1)为了解决什么问题，具有什么特点，能力边界在哪里。
 2. envoy的基本概念与框架。
    
     明确envoy中的基本术语，以及envoy的基本工作框架，处理流程。
@@ -37,7 +37,7 @@ tags: [IT, k8s, ingress, envoy, proxy]
 
 ---
 
-# Envoy 是什么
+# <span id="t1">Envoy 是什么</span>
 
 根据[envoy官网](https://www.envoyproxy.io/)的定义，envoy是一个开源的为云原生应用而设计的边缘和服务代理（edge and service proxy）。使用c++ 编写，设计定位是用于大规模微服务服务网格架构的通用数据平面。为的是解决以下在大规模微服务场景中存在的挑战：1. 复杂异构系统中的网络维护；2. 流量监控中的困难；3.  扩缩容。
 
@@ -621,4 +621,9 @@ envoy每个版本会增加一些新的功能，可能会带来api 的变化，�
 - 流量分割
 - 操作header信息（包括request的header以及 response的header）
 - timeout配置
--
+
+---
+
+相关内容：
+
+1. [envoy 动态路由配置信息查看](https://hxysayhi.com/blog/posts/61a05b5d/)

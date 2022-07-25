@@ -4,7 +4,7 @@ title:  "envoy proxy调研笔记"
 description: "envoy proxy 相关调研内容。"
 date:   2022-07-25 20:27:32 +0800
 categories: Technology notes
-permalink: /posts/4a1349e1/
+permalink: /posts//pic/4a1349e1/
 preview: "内容摘要: 我们主要想了解 envoy 如何提供 L4/L7的代理服务，envoy具体提供哪些功能，我们如何利用这些功能实现我们的业务场景。在envoy如何提供代理能力方面，主要有两点：1. envoy 如何从控制面获取配置； 2. envoy 如何根据配置信息进行路由。在如何利用envoy提供的功能实现我们的业务场景方面，主要是 如何将 k8s集群中的相关资源对象的描述信息，转换为envoy 的配置。"
 tags: [IT, k8s, ingress, envoy, proxy]
 ---
@@ -43,11 +43,11 @@ tags: [IT, k8s, ingress, envoy, proxy]
 
 通常来说有两种部署方式，一种是作为sidecar 和微服务应用部署在一起，将网络相关的逻辑从微服务中抽离出来，提供服务网格的数据面能。
 
-![Untitled](4a1349e1/p0.png)
+![Untitled](/pic/4a1349e1/p0.png)
 
 另一种部署方式是作为一个代理网关部署，作为微服务集群的流量入口。
 
-![Untitled](4a1349e1/p1.png)
+![Untitled](/pic/4a1349e1/p1.png)
 
 envoy可以提供的能力有：负载均衡、可用性增强能力（如超时、熔断、重试等）、可观测性、指标监控等。
 
@@ -59,7 +59,7 @@ envoy只扮演数据平面的角色，不扮演控制平面的角色。尽管env
 
 当前常见的控制面实现有：istio、contour、emissary-ingress（ambassador）、gloo等。以conotur为例，常见的部署形态如下所示：
 
-![Untitled](4a1349e1/p2.png)
+![Untitled](/pic/4a1349e1/p2.png)
 
 参考链接：
 
@@ -110,7 +110,7 @@ envoy只扮演数据平面的角色，不扮演控制平面的角色。尽管env
 
 envoy的核心能力是处理流量，当一个请求到来时，主要经历envoy 中两个主要子系统的处理（[ref](https://www.envoyproxy.io/docs/envoy/v1.21.4/intro/life_of_a_request#high-level-architecture)）：
 
-![lor-architecture.svg](4a1349e1/lor-architecture.svg)
+![lor-architecture.svg](/pic/4a1349e1/lor-architecture.svg)
 
 - Listener subsystem：处理来自downstream的请求，同时负责管理downstream的请求的生命周期，并负责传输response。downstream的http/2编解码器就属于这个组件。
 - Cluster subsystem：负责选择和管理到upstream endpoint的连接。这个组件管理 上游 cluster 和 endpoint的健康新情况，进行负载均衡，管理连接池。upstream的 http/2 编解码器属于这个组件。
@@ -131,7 +131,7 @@ worker thread 持有自己的一个Listener 实例，当新的tcp连接到来时
 
 2. Listener filter chains and network filter chain matching[¶](https://www.envoyproxy.io/docs/envoy/v1.21.4/intro/life_of_a_request#listener-filter-chains-and-network-filter-chain-matching)
 
-![Untitled](4a1349e1/p3.png)
+![Untitled](/pic/4a1349e1/p3.png)
 
 Listener接受请求后，依次调用 Listener filter chain 和 network filter chain对请求进行处理。
 
@@ -151,7 +151,7 @@ listener filters 对新接受的socket进行操作，并可以停止或随后继
 
 结合前面的处理流程，一个请求进来之后的处理流程如下图所示：
 
-![lor-network-filters.svg](4a1349e1/lor-network-filters.svg)
+![lor-network-filters.svg](/pic/4a1349e1/lor-network-filters.svg)
 
 5. **HTTP/2 codec decoding[¶](https://www.envoyproxy.io/docs/envoy/v1.21.4/intro/life_of_a_request#http-2-codec-decoding)**
 
@@ -161,7 +161,7 @@ listener filters 对新接受的socket进行操作，并可以停止或随后继
 
 HCM 中 filter chain 处理流程大致如下图：
 
-![lor-http-filters.svg](4a1349e1/lor-http-filters.svg)
+![lor-http-filters.svg](/pic/4a1349e1/lor-http-filters.svg)
 
 HCM 的filter chain中最后一个filter 为 route filter ，负责选定route configuration， 确定upstream cluster。当route filter被调用，路由选择过程就完成了。所选路由的配置将指向上游集群名称。然后，路由器过滤器向 ClusterManager 请求集群的 HTTP 连接池。
 
@@ -171,7 +171,7 @@ HCM 的filter chain中最后一个filter 为 route filter ，负责选定route c
 
 一旦选择了一个endpoint，这个endpoint的连接池就被用来寻找一个连接来转发请求。
 
-![lor-lb.svg](4a1349e1/lor-lb.svg)
+![lor-lb.svg](/pic/4a1349e1/lor-lb.svg)
 
 8. **HTTP/2 codec encoding[¶](https://www.envoyproxy.io/docs/envoy/v1.21.4/intro/life_of_a_request#http-2-codec-encoding)**
 
@@ -181,7 +181,7 @@ HCM 的filter chain中最后一个filter 为 route filter ，负责选定route c
 
 进行 tls 传输加密
 
-![lor-client.svg](4a1349e1/lor-client.svg)
+![lor-client.svg](/pic/4a1349e1/lor-client.svg)
 
 10. **Response path and HTTP lifecycle[¶](https://www.envoyproxy.io/docs/envoy/v1.21.4/intro/life_of_a_request#response-path-and-http-lifecycle)**
 
@@ -321,7 +321,7 @@ VirtualHost 中存有 routeEntry， 存在 vector中，routeEntry 有 各种 匹
 2. 从VirtualHost中getRouteFromEntries
    这个步骤是遍历 vector 进行匹配，发现匹配的 routeEntry就返回，不再管后面有没有匹配的routeEntry
    
-    ![lor-route-config.svg](4a1349e1/lor-route-config.svg)
+    ![lor-route-config.svg](/pic/4a1349e1/lor-route-config.svg)
    
 
 完整域名匹配的情况容易理解，以下补充说明在前缀匹配和后缀匹配情形下的匹配流程，wildcard_virtual_host_suffixes_ 的结构大致如下：
@@ -475,7 +475,7 @@ VirtualHost 中存有 routeEntry， 存在 vector中，routeEntry 有 各种 匹
 
 随机选择cluster 的流程是 根据请求，产生一个数，将该数按总权重取模，并根据取模后的值所在的区间确定选择哪个cluster。
 
-![Untitled](4a1349e1/p4.png)
+![Untitled](/pic/4a1349e1/p4.png)
 
 在1.21.x 版本的envoy上，在weight cluster 中有 header name 属性，通过指定这个值，可以由用户通过指定的header 传入“随机值”，如果用户指定来该属性值，且在请求中携带了合法有效的数值，则将使用该值，否则生成一个随机值。
 
@@ -493,7 +493,7 @@ envoy支持的负载均衡策略有（[ref](https://www.envoyproxy.io/docs/envoy
 
 一旦选择了一个endpoint，这个endpoint的连接池就被用来寻找一个连接来转发请求。如果不存在与主机的连接，或者所有连接都处于最大并发流限制，则会建立一个新连接并将其放置在连接池中，除非集群的最大连接断路器已经触发熔断。如果配置了并达到了连接的最大生命周期流限制，则会在池中分配一个新连接，并丢弃受影响的 HTTP/2 连接。
 
-![lor-lb.svg](4a1349e1/lor-lb%201.svg)
+![lor-lb.svg](/pic/4a1349e1/lor-lb%201.svg)
 
 ---
 
@@ -507,7 +507,7 @@ Envoy 有一个基于事件的线程模型。一个主线程负责服务器生�
 
 ## Listener和worker thread
 
-![lor-listeners.svg](4a1349e1/lor-listeners.svg)
+![lor-listeners.svg](/pic/4a1349e1/lor-listeners.svg)
 
 ListenerManager 负责获取表示Listener的配置并实例化绑定到各自 IP/端口的多个Listener实例。Listener可能处于以下三种状态之一：
 
@@ -533,15 +533,15 @@ envoy支持一系列的http filter，这些filter对http级别的消息进行处
 
 假设有如下filter chain：
 
-![Untitled](4a1349e1/p5.png)
+![Untitled](/pic/4a1349e1/p5.png)
 
      在请求路径上的调用情况如下：
 
-![Untitled](4a1349e1/p6.png)
+![Untitled](/pic/4a1349e1/p6.png)
 
       在响应路径上的调用情况如下：
 
-![Untitled](4a1349e1/p7.png)
+![Untitled](/pic/4a1349e1/p7.png)
 
 单个http filter可以停止或继续执行后续的filter，并在单个请求流的范围内相互分享状态。
 

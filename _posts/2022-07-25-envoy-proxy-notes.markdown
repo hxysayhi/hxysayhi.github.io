@@ -4,7 +4,7 @@ title:  "envoy proxy调研笔记"
 description: "envoy proxy 相关调研内容。"
 date:   2022-07-25 20:27:32 +0800
 categories: Technology notes
-permalink: /posts//pic/4a1349e1/
+permalink: /posts/4a1349e1/
 preview: "内容摘要: 我们主要想了解 envoy 如何提供 L4/L7的代理服务，envoy具体提供哪些功能，我们如何利用这些功能实现我们的业务场景。在envoy如何提供代理能力方面，主要有两点：1. envoy 如何从控制面获取配置； 2. envoy 如何根据配置信息进行路由。在如何利用envoy提供的功能实现我们的业务场景方面，主要是 如何将 k8s集群中的相关资源对象的描述信息，转换为envoy 的配置。"
 tags: [IT, k8s, ingress, envoy, proxy]
 ---

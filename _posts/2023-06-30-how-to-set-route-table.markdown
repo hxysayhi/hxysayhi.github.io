@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "how-to-set-route-table"
+title:  "如何临时或永久修改route table"
 description: "如何修改route table，如何临时增加或删除路由条目，如何永久添加或删除路由条目"
 date:   2023-06-30 08:34:50 +0800
 categories: Technology notes
@@ -10,7 +10,8 @@ preview: "内容摘要： 如何修改route table，如何临时增加或删除�
 ---
 
 
-# route table 修改
+## 内容摘要
+如何修改route table，如何临时增加或删除路由条目，如何永久添加或删除路由条目。主要涉及route命令、nmcli命令、相关配置文件持久化位置等
 
 ## 临时修改，重启后丢失
 

@@ -19,7 +19,7 @@ preview: "内容摘要： 如何修改route table，如何临时增加或删除�
 
 命令使用方式：
 
-route {add | delete} {-host | -net} {des_ip} [netmask {net mask}] [gw {gw}] [dev {device}]
+`route {add | delete} {-host | -net} {des_ip} [netmask {net mask}] [gw {gw}] [dev {device}]`
 
 route add：命令关键字，表示增加路由，若要删除路由，则为route del；
 
@@ -31,7 +31,7 @@ gw：命令关键字，后面跟下一跳网关；
 
 dev：命令关键字，后面跟具体设备名，表示路由是从该设备出去。
 
-metric：为路由指定所需[跃点数](http://baike.baidu.com/view/1781753.htm)的整数值（范围是 1 ~ 9999），它用来在[路由表](http://baike.baidu.com/view/149989.htm)里的多个路由中选择与转发包中的目标地址最为匹配的路由。所选的路由具有最少的跃点数。跃点数能够反映跃点的数量、路径的速度、路径可靠性、路径吞吐量以及管理属性。
+metric：为路由指定所需跳数里的多个路由中选择与转发包中的目标地址最为匹配的路由。所选的路由具有最少的跳数。跳数能够反映途经节点的数量、路径的速度、路径可靠性、路径吞吐量以及管理属性。
 
 示例：
 
